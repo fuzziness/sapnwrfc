@@ -56,8 +56,8 @@
 	#
   #
   # Author::   Piers Harding <piers@ompka.net>
-  # Requires:: Ruby 1.8 or later
   #
+# Requires:: Ruby 1.9 or later
 
 Logger.class_eval do
   def set_logdev(logfile, logfile_age = 0, logfile_size = 1048576)

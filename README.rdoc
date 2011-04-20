@@ -1,4 +1,4 @@
-= sapnwrfc - SAP Netweaver RFC support for Ruby - the next generation
+= sapnwrfc - SAP Netweaver RFC support for Ruby 1.9.x
 
 == Summary
 
@@ -59,6 +59,6 @@ One last thing - The SAP RFCSDK is a prerequisite for this perl package to work.
 = Other stuff
 
 Author::   Piers Harding <piers@ompka.net>
-Requires:: Ruby 1.8.x or later
+Requires:: Ruby 1.9.x or later
 License::  Copyright (c) 2006-2008 Piers Harding
            Released under Ruby's License

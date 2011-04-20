@@ -910,7 +910,7 @@ class ToplevelInstaller
     set = []
     @config.config_opt = []
     while i = ARGV.shift
-		  i.rstrip!
+		  i = i.rstrip
       if /\A--?\z/ =~ i or
          /\A--[\w\-]+\=[\w\d\/\\\:\~\-]+\z/.match(i)
 			  #XXX
@@ -1501,7 +1501,7 @@ class Installer
     begin
       require 'test/unit'
     rescue LoadError
-      setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.8 or later to invoke this task.'
+      setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.9 or later to invoke this task.'
     end
     runner = Test::Unit::AutoRunner.new(true)
     runner.to_run << TESTDIR

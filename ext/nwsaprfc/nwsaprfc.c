@@ -92,7 +92,7 @@ static void * make_space(int len){
 static void * make_strdup(VALUE value){
 
     char * ptr;
-    int len = RSTRING(value)->len;
+    int len = RSTRING_LEN(value);
 		ptr = make_space(len);
 		memcpy((char *)ptr, StringValueCStr(value), len);
     return ptr;
@@ -131,7 +131,7 @@ SAP_UC * u8to16(VALUE str) {
 	unsigned sapucSize, resultLength;
 
   //sapucSize = RSTRING(str)->len;
-  sapucSize = RSTRING(str)->len + 1;
+  sapucSize = RSTRING_LEN(str) + 1;
   //sapucSize = (2 * sapucSize) + 2;
   //sapucSize += MB_LEN_MAX + 2;
   sapuc = mallocU(sapucSize);
@@ -139,7 +139,7 @@ SAP_UC * u8to16(VALUE str) {
 
 	resultLength = 0;
 
-  rc = RfcUTF8ToSAPUC((RFC_BYTE *)StringValueCStr(str), RSTRING(str)->len, sapuc, &sapucSize, &resultLength, &errorInfo);
+  rc = RfcUTF8ToSAPUC((RFC_BYTE *)StringValueCStr(str), RSTRING_LEN(str), sapuc, &sapucSize, &resultLength, &errorInfo);
 	return sapuc;
 }
 
@@ -357,7 +357,7 @@ RFC_TYPE_DESC_HANDLE SAPNW_build_type(VALUE name, VALUE fields) {
 	uoff = 0;
   Check_Type(fields, T_ARRAY);
 	//fprintf(stderr, "Have %d fields\n", (int) RARRAY(fields)->len);
-	for (i = 0; i < RARRAY(fields)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(fields); i++) {
     field = rb_ary_entry(fields, i);
     Check_Type(field, T_HASH);
     fname = rb_hash_aref(field, ID2SYM(rb_intern("name")));
@@ -477,7 +477,7 @@ static VALUE  SAPNW_RFC_HANDLE_new(VALUE class, VALUE connobj){
   connParms = rb_iv_get(connobj, "@connection_parameters");
   Check_Type(connParms, T_ARRAY);
 
-  idx = RARRAY(connParms)->len;
+  idx = RARRAY_LEN(connParms);
 	if (idx == 0) {
 	  rb_raise(rb_eRuntimeError, "No connection parameters\n");
 	}
@@ -1706,7 +1706,7 @@ void set_date_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value){
 
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetDate invalid Input value type: %s\n", StringValueCStr(value));
-	if (RSTRING(value)->len != 8)
+	if (RSTRING_LEN(value) != 8)
 		rb_raise(rb_eRuntimeError, "RfcSetDate invalid date format: %s\n", StringValueCStr(value));
   p_value = u8to16(value);
 	memcpy((char *)date_value+0, (char *)p_value, 16);
@@ -1734,7 +1734,7 @@ void set_time_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value){
 
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetTime invalid Input value type: %s\n", StringValueCStr(value));
-	if (RSTRING(value)->len != 6)
+	if (RSTRING_LEN(value) != 6)
 		rb_raise(rb_eRuntimeError, "RfcSetTime invalid date format: %s\n", StringValueCStr(value));
   p_value = u8to16(value);
 	memcpy((char *)time_value+0, (char *)p_value, 12);
@@ -1761,7 +1761,7 @@ void set_num_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value, unsig
 
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetNum invalid Input value type: %s\n", StringValueCStr(value));
-	if (RSTRING(value)->len > max)
+	if (RSTRING_LEN(value) > max)
 		rb_raise(rb_eRuntimeError, "RfcSetNum string too long: %s\n", StringValueCStr(value));
 
   p_value = u8to16(value);
@@ -1814,7 +1814,7 @@ void set_char_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value, unsi
 
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetChar invalid Input value type: %s\n", StringValueCStr(value));
-	if (RSTRING(value)->len > max)
+	if (RSTRING_LEN(value) > max)
 		rb_raise(rb_eRuntimeError, "RfcSetChar string too long: %s\n", StringValueCStr(value));
 
   p_value = u8to16(value);
@@ -1839,9 +1839,9 @@ void set_byte_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value, unsi
 
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetByte invalid Input value type: %s\n", StringValueCStr(value));
-	if (RSTRING(value)->len > max)
+	if (RSTRING_LEN(value) > max)
 		rb_raise(rb_eRuntimeError, "RfcSetByte string too long: %s\n", StringValueCStr(value));
-  rc = RfcSetBytes(hcont, name, (SAP_RAW *)StringValueCStr(value), RSTRING(value)->len, &errorInfo);
+  rc = RfcSetBytes(hcont, name, (SAP_RAW *)StringValueCStr(value), RSTRING_LEN(value), &errorInfo);
   if (rc != RFC_OK) {
   	SAPNW_rfc_call_error(rb_str_concat(rb_str_new2("Problem with RfcSetBytes: "),
 		                                   u16to8(name)),
@@ -1976,7 +1976,7 @@ void set_xstring_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value){
 	if (TYPE(value) != T_STRING)
 		rb_raise(rb_eRuntimeError, "RfcSetXString invalid Input value type: %s\n", StringValueCStr(value));
 
-  rc = RfcSetXString(hcont, name, (SAP_RAW *)StringValueCStr(value), RSTRING(value)->len, &errorInfo);
+  rc = RfcSetXString(hcont, name, (SAP_RAW *)StringValueCStr(value), RSTRING_LEN(value), &errorInfo);
   if (rc != RFC_OK) {
   	SAPNW_rfc_call_error(rb_str_concat(rb_str_new2("Problem with RfcSetXString: "),
 		                                   u16to8(name)),
@@ -2026,7 +2026,7 @@ void set_structure_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value)
           							 u16to8(errorInfo.message));
   }
 
-	for (i = 0; i < RARRAY(keys)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(keys); i++) {
     key = rb_ary_entry(keys, i);
     val = rb_hash_aref(value, key);
 
@@ -2145,7 +2145,7 @@ void set_table_line(RFC_STRUCTURE_HANDLE line, VALUE value){
           							 u16to8(errorInfo.message));
   }
 
-	for (i = 0; i < RARRAY(keys)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(keys); i++) {
     key = rb_ary_entry(keys, i);
     val = rb_hash_aref(value, key);
 
@@ -2175,7 +2175,7 @@ void set_table_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, VALUE value){
 	VALUE row;
 
   Check_Type(value, T_ARRAY);
-	for (r = 0; r < RARRAY(value)->len; r++) {
+	for (r = 0; r < RARRAY_LEN(value); r++) {
     row = rb_ary_entry(value, r);
 	  line = RfcAppendNewRow(hcont, &errorInfo);
     if (line == NULL) {
@@ -2345,7 +2345,7 @@ RFC_RC SAP_API SAPNW_function_callback(RFC_CONNECTION_HANDLE rfcHandle, RFC_FUNC
 	/* unpick all the parameters ready for Ruby callback */
   parameters = rb_iv_get(fcall, "@parameters_list");
   Check_Type(parameters, T_ARRAY);
-	for (i = 0; i < RARRAY(parameters)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(parameters); i++) {
      parm = rb_ary_entry(parameters, i);
 		 name = rb_iv_get(parm, "@name");
 	   switch(NUM2INT(rb_iv_get(parm, "@direction"))) {
@@ -2415,7 +2415,7 @@ RFC_RC SAP_API SAPNW_function_callback(RFC_CONNECTION_HANDLE rfcHandle, RFC_FUNC
 	 }
 
 	/* repack all the parameters */
-	for (i = 0; i < RARRAY(parameters)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(parameters); i++) {
      parm = rb_ary_entry(parameters, i);
 		 name = rb_iv_get(parm, "@name");
 	   switch(NUM2INT(rb_iv_get(parm, "@direction"))) {
@@ -2441,7 +2441,7 @@ RFC_RC SAP_API SAPNW_function_callback(RFC_CONNECTION_HANDLE rfcHandle, RFC_FUNC
        												 u16to8(errorInfo.key),
 			       									 u16to8(errorInfo.message));
        	 }
-	       for (r = 0; r < RARRAY(value)->len; r++) {
+	       for (r = 0; r < RARRAY_LEN(value); r++) {
            row = rb_ary_entry(value, r);
 					 line = RfcAppendNewRow(tableHandle, &errorInfo);
            if (line == NULL) {
@@ -2555,7 +2555,7 @@ static VALUE SAPNW_RFC_FUNC_CALL_invoke(VALUE self){
   parameters = rb_iv_get(self, "@parameters_list");
   Check_Type(parameters, T_ARRAY);
 
-	for (i = 0; i < RARRAY(parameters)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(parameters); i++) {
      parm = rb_ary_entry(parameters, i);
 		 name = rb_iv_get(parm, "@name");
 	   switch(NUM2INT(rb_iv_get(parm, "@direction"))) {
@@ -2578,7 +2578,7 @@ static VALUE SAPNW_RFC_FUNC_CALL_invoke(VALUE self){
        												 u16to8(errorInfo.key),
 			       									 u16to8(errorInfo.message));
        	 }
-	       for (r = 0; r < RARRAY(value)->len; r++) {
+	       for (r = 0; r < RARRAY_LEN(value); r++) {
            row = rb_ary_entry(value, r);
 					 line = RfcAppendNewRow(tableHandle, &errorInfo);
            if (line == NULL) {
@@ -2611,7 +2611,7 @@ static VALUE SAPNW_RFC_FUNC_CALL_invoke(VALUE self){
 												 u16to8(errorInfo.message));
 	}
 
-	for (i = 0; i < RARRAY(parameters)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(parameters); i++) {
      parm = rb_ary_entry(parameters, i);
 		 name = rb_iv_get(parm, "@name");
 	   switch(NUM2INT(rb_iv_get(parm, "@direction"))) {

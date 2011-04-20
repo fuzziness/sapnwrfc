@@ -4,7 +4,7 @@
 # the Ruby distribution.
 #
 # Author::   Piers Harding <piers@ompka.net>
-# Requires:: Ruby 1.8 or later
+# Requires:: Ruby 1.9 or later
 #
 
 module SAPNW

@@ -1,3 +1,4 @@
+# Requires:: Ruby 1.9.0 or later
 
   #
   #
@@ -177,7 +178,6 @@
   #
   # Author::   Piers Harding <piers@ompka.net>
   # License::  Copyright (c) 2006-2008 Piers Harding. sapnwrfc is free software, and may be redistributed under the terms specified in the README file of the Ruby distribution.
-  # Requires:: Ruby 1.8.0 or later
   #
 
 
