@@ -13,11 +13,11 @@
 module SAPNW
 
   # Some doco in the SAPNW module
-  class Base 
+  class Base
 
-  # some doco in Base
+    # some doco in Base
 
-	@@rfc_connections = {}
+    @@rfc_connections = {}
 
 
 #     def rfc_connection(*args)
