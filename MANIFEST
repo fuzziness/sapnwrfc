@@ -4,7 +4,6 @@ MANIFEST
 README
 ChangeLog
 sapnwrfc.linux.gemspec
-sapnwrfc.mswin32.gemspec
 lib/sapnwrfc/base.rb
 lib/sapnwrfc/config.rb
 lib/sapnwrfc/connection.rb
