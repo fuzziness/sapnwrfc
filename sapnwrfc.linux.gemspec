@@ -1,4 +1,7 @@
+# -*- encoding: utf-8 -*-
+require File.expand_path('../lib/sapnwrfc/version', __FILE__)
 require "rbconfig.rb"
+
 Gem::Specification.new do |spec|
   spec.authors = ["Piers Harding"]
   spec.email = 'piers@ompka.net'
@@ -9,11 +12,11 @@ Gem::Specification.new do |spec|
     an SAP Netweaver system NW2004+
   EOF
   spec.version = '0.23'
-  spec.autorequire = [ 'sapnwrfc' ]
-  spec.platform = Config::CONFIG["arch"]
-  spec.homepage = 'http://www.piersharding.com'
-  spec.files = Dir['lib/**/*.rb']
+  spec.platform = RbConfig::CONFIG["arch"]
+  spec.homepage = 'http://github.com/fuzziness/sapnwrfc'
+  spec.files = Dir['lib/**/*.rb', 'README.*', 'ChangeLog']
   spec.files += Dir['ext/nwsaprfc/*.so']
+  spec.test_files = Dir['test/**/*']
   spec.required_ruby_version = '>= 1.9.0'
   spec.require_paths = ['ext/nwsaprfc', 'lib']
 end
