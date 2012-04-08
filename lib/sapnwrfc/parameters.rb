@@ -3,6 +3,7 @@
 # the Ruby distribution.
 #
 # Author::   Piers Harding <piers@ompka.net>
+# Author::   Michele Franzin <michele@franzin.net>
 # Requires:: Ruby 1.9 or later
 #
 

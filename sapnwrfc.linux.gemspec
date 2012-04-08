@@ -3,8 +3,8 @@ require File.expand_path('../lib/sapnwrfc/version', __FILE__)
 require "rbconfig.rb"
 
 Gem::Specification.new do |spec|
-  spec.authors = ["Piers Harding"]
-  spec.email = 'piers@ompka.net'
+  spec.authors = ["Piers Harding", "Michele Franzin"]
+  spec.email = ['piers@ompka.net' 'michele@franzin.net']
   spec.name = 'sapnwrfc'
   spec.summary = 'SAP Netweaver RFC connector for Ruby'
   spec.description = <<-EOF

@@ -46,6 +46,8 @@ eg - mine is:
 
 == Credits
 
+GitHub repo:: Michele Franzin <michele@franzin.net>
+Ruby 1.9.x porting:: Michele Franzin <michele@franzin.net>
 
 == License
 

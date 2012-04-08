@@ -7,8 +7,10 @@
 # sapnwrfc is a RFC based connector to SAP specifically designed for use with the
 # next generation RFC SDK supplied by SAP for NW2004+ .
 #
+# Author::   Piers Harding <piers@ompka.net>
+# Author::   Michele Franzin <michele@franzin.net>
+# Requires:: Ruby 1.9 or later
 #
-# 
 
 module SAPNW
 
