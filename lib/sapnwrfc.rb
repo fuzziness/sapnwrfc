@@ -192,6 +192,7 @@ SAP_LOGGER = Logger.new(STDERR)
 SAP_LOGGER.datetime_format = "%Y-%m-%d %H:%M:%S"
 SAP_LOGGER.level = Logger::WARN
 
+require 'sapnwrfc/version'
 require 'sapnwrfc/base'
 
 # C extension

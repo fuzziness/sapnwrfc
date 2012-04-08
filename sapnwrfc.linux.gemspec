@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
     sapnwrfc is a ruby module for performing RFC functions and BAPI calls on
     an SAP Netweaver system NW2004+
   EOF
-  spec.version = '0.23'
+  spec.version = SAPNW::VERSION
   spec.platform = RbConfig::CONFIG["arch"]
   spec.homepage = 'http://github.com/fuzziness/sapnwrfc'
   spec.files = Dir['lib/**/*.rb', 'README.*', 'ChangeLog']
