@@ -19,3 +19,7 @@ Thu Jun 26 18:51:20 NZST 2008
 
 Thu Dec 11 09:51:47 NZDT 2008
   * make sure that close cannot be called twice
+
+2011-05-27  Michele Franzin  <michele.franzin@gmail.com>
+  * create github project
+  * upgrade to ruby 1.9.x
