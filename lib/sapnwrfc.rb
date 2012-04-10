@@ -9,9 +9,9 @@
 #
 # = Download and Documentation
 #
-# Documentation at: http://www.piersharding.com/download/ruby/sapnwrfc/doc/
+# Documentation at: http://rubydoc.info/github/fuzziness/sapnwrfc/frames
 #
-# Project and Download at: http://raa.ruby-lang.org/project/sapnwrfc
+# Project and Download at: https://github.com/fuzziness/sapnwrfc
 #
 # = Functionality
 #
@@ -166,9 +166,10 @@
 #
 # = Thanks to:
 #
-# * Olivier Boudry - an Open Source guy
-# * Craig Cmehil   - SAP, and SDN
-# * Ulrich Schmidt - SAP
+# * Olivier Boudry  - an Open Source guy
+# * Craig Cmehil    - SAP, and SDN
+# * Ulrich Schmidt  - SAP
+# * Michele Franzin - ruby 1.9.x porting
 # For their help in making this possible.
 #
 #
@@ -176,7 +177,7 @@
 #
 # Author::   Piers Harding <piers@ompka.net>
 # License::  Copyright (c) 2006-2008 Piers Harding. sapnwrfc is free software, and may be redistributed under the terms specified in the README file of the Ruby distribution.
-# Requires:: Ruby 1.9.0 or later
+# Requires:: Ruby 1.9.x or later
 #
 
 
